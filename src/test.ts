@@ -1,21 +1,22 @@
-class Bike {
-    color
-
-    constructor(color) {
-        this.color = color
-    }
-
-    ring() {
-        console.log('ring ring')
+class Greeters {
+    static standardGreeting = "Hello, there";
+    greeting: string;
+    greet() {
+        if (this.greeting) {
+            return "Hello, " + this.greeting;
+        }
+        else {
+            return Greeters.standardGreeting;
+        }
     }
 }
 
-function logWithTimestamp(data) {
-    console.log(`${new Date()}: ${data}`)
-}
+let greeter1: Greeters;
+greeter1 = new Greeters();
+console.log(greeter1.greet()); // "Hello, there"
 
-const log = logWithTimestamp;
+let greeterMaker: typeof Greeters = Greeters;
+greeterMaker.standardGreeting = "Hey there!";
 
-['purple', 'red'].forEach(color => (new Bike(color)).ring())
-
-log('bikes created')
+let greeter2: Greeter = new greeterMaker();
+console.log(greeter2.greet()); // "Hey there!"
